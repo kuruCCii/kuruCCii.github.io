@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Puzzle</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .puzzle-box {
+      border: 2px solid white;
+      padding: 20px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.2rem;
+      margin-left: 10px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .result-box {
+      font-size: 1.2rem;
+      padding: 10px;
+      background-color: #eee;
+      margin-bottom: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body style="background-color: pink;">
+  <h1 align="center">An interesting math problem</h1>
+  <div class="container">
+    <div class="puzzle-box">
+      <img src="math.jpg" alt="Math Problem">
+      <form id="puzzle-form">
+        <label for="answer">如图，九个边长为正整数的正方形无重叠无间隙地拼成了一个矩形，求这个矩形面积的最小值</label>
+        <input type="text" id="answer" name="answer" required>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="result-box"></div>
+    </div>
+  </div>
+
+  <script>
+    // Define the correct answer to the math problem
+    const correctAnswer = 1056;
+
+    // Get references to the HTML form and result box
+    const form = document.getElementById("puzzle-form");
+    const resultBox = document.getElementById("result-box");
+
+    // Add an event listener to the HTML form to check the user's guess and display the result
+    form.addEventListener("submit", event => {
+      event.preventDefault(); // Prevent the form from submitting and refreshing the page
+
+      // Get the user's guess from the input element
+      const guessInput = form.querySelector("input[type='text']");
+      const guess = parseInt(guessInput.value.trim());
+
+      // Check if the user's guess matches the correct answer
+      const isCorrect = guess === correctAnswer;
+
+      // Display the result in the result box
+      resultBox.innerHTML = `<p>Your guess was ${isCorrect ? "correct" : "incorrect"}!</p>`;
+
+      // Clear the input element
+      guessInput.value = "";
+    });
+  </script>
+</body>
+</html>
