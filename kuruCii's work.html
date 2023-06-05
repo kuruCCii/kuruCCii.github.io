@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>kuruCii's work</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<style>
+/*玫红色方块css，来自codepen作者Carter Lovelace*/
+:root {
+  --cube: 5vmin;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+#cube-wrap {
+  perspective: 400px;
+  perspective-origin: 50% var(--cube);
+  height: 30vh;
+  display: grid;
+  align-content: center;
+  background: black;
+  overflow: hidden;
+  cursor: grab;
+}
+
+#cube-wrap:active {
+  cursor: grabbing;
+}
+
+.cube {
+  position: relative;
+  width: var(--cube);
+  height: var(--cube);
+  transform-style: preserve-3d;
+  transform: rotateX(-30deg) rotateY(45deg);
+  margin: 0 auto;
+  user-select: none;
+}
+
+.inner-wrap {
+  position: relative;
+  width: var(--cube);
+  height: var(--cube);
+  transform-style: preserve-3d;
+  animation: spin 5s infinite linear;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.cube .face {
+  position: absolute;
+  background: rgba(255, 0, 150, 0.25);
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid black;
+}
+
+.front {
+  transform: rotateY(0deg) translateZ(calc(var(--cube) * 0.5));
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(calc(var(--cube) * 0.5));
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(calc(var(--cube) * 0.5));
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(calc(var(--cube) * 0.5));
+}
+
+.top {
+  transform: rotateX(90deg) translateY(calc(var(--cube) * -0.5));
+  transform-origin: top left;
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateY(calc(var(--cube) * 0.5));
+  transform-origin: bottom left;
+}
+
+.inner1 {
+  transform: rotateX(0) rotateY(90deg) translateY(0px);
+}
+
+.inner2 {
+  transform: rotateX(90deg) translateY(0px);
+}
+
+.inner3 {
+}
+
+.cube .inner {
+  border: 2px solid black;
+  backface-visibility: visible !important;
+  border-radius: 100%;
+}
+
+/*.inner::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  border-bottom: 5px solid black;
+}
+
+.inner::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  bottom: 0;
+  right: 0;
+  border-left: 5px solid black;
+}*/
+
+@keyframes spin {
+  from {
+    transform: rotateX(0) rotateY(0);
+  }
+
+  to {
+    transform: rotateX(1turn) rotateY(1turn);
+  }
+}
+
+/*标题来自codepen作者Ostylowany*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+
+:root {
+  --bg: #000000;
+  --clr-1: #00c2ff;
+  --clr-2: #33ff8c;
+  --clr-3: #ffc640;
+  --clr-4: #e54cff;
+
+  --blur: 1rem;
+  --fs: clamp(3rem, 8vw, 7rem);
+  --ls: clamp(-1.75px, -0.25vw, -3.5px);
+}
+
+body {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--bg);
+  color: #fff;
+  font-family: "Inter", "DM Sans", Arial, sans-serif;
+  padding: 1rem;
+ text-rendering: optimizeLegibility;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ -moz-font-feature-settings: "liga" on;
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: var(--fs);
+  font-weight: 800;
+  letter-spacing: var(--ls);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  margin-bottom: 50px;
+  margin-top: 0px;
+}
+
+.subtitle {
+  margin-top: 30px;
+  margin-bottom:50px;
+}
+
+.aurora {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  mix-blend-mode: darken;
+  pointer-events: none;
+}
+
+.aurora__item {
+  overflow: hidden;
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  background-color: var(--clr-1);
+  border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%;
+  filter: blur(var(--blur));
+  mix-blend-mode: overlay;
+}
+
+.aurora__item:nth-of-type(1) {
+  top: -50%;
+  animation: aurora-border 6s ease-in-out infinite,
+    aurora-1 12s ease-in-out infinite alternate;
+}
+
+.aurora__item:nth-of-type(2) {
+  background-color: var(--clr-3);
+  right: 0;
+  top: 0;
+  animation: aurora-border 6s ease-in-out infinite,
+    aurora-2 12s ease-in-out infinite alternate;
+}
+
+.aurora__item:nth-of-type(3) {
+  background-color: var(--clr-2);
+  left: 0;
+  bottom: 0;
+  animation: aurora-border 6s ease-in-out infinite,
+    aurora-3 8s ease-in-out infinite alternate;
+}
+
+.aurora__item:nth-of-type(4) {
+  background-color: var(--clr-4);
+  right: 0;
+  bottom: -50%;
+  animation: aurora-border 6s ease-in-out infinite,
+    aurora-4 24s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-1 {
+  0% {
+    top: 0;
+    right: 0;
+  }
+
+  50% {
+    top: 100%;
+    right: 75%;
+  }
+
+  75% {
+    top: 100%;
+    right: 25%;
+  }
+
+  100% {
+    top: 0;
+    right: 0;
+  }
+}
+
+@keyframes aurora-2 {
+  0% {
+    top: -50%;
+    left: 0%;
+  }
+
+  60% {
+    top: 100%;
+    left: 75%;
+  }
+
+  85% {
+    top: 100%;
+    left: 25%;
+  }
+
+  100% {
+    top: -50%;
+    left: 0%;
+  }
+}
+
+@keyframes aurora-3 {
+  0% {
+    bottom: 0;
+    left: 0;
+  }
+
+  40% {
+    bottom: 100%;
+    left: 75%;
+  }
+
+  65% {
+    bottom: 40%;
+    left: 50%;
+  }
+
+  100% {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+@keyframes aurora-4 {
+  0% {
+    bottom: -50%;
+    right: 0;
+  }
+
+  50% {
+    bottom: 0%;
+    right: 40%;
+  }
+
+  90% {
+    bottom: 50%;
+    right: 25%;
+  }
+
+  100% {
+    bottom: -50%;
+    right: 0;
+  }
+}
+
+@keyframes aurora-border {
+  0% {
+    border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%;
+  }
+
+  25% {
+    border-radius: 47% 29% 39% 49% / 61% 19% 66% 26%;
+  }
+
+  50% {
+    border-radius: 57% 23% 47% 72% / 63% 17% 66% 33%;
+  }
+
+  75% {
+    border-radius: 28% 49% 29% 100% / 93% 20% 64% 25%;
+  }
+
+  100% {
+    border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%;
+  }
+}
+
+/*card*/
+@gray-darker:               #444444;
+@gray-dark:                 #696969;
+@gray:                      #999999;
+@gray-light:                #cccccc;
+@gray-lighter:              #ececec;
+@gray-lightest:             lighten(@gray-lighter,4%);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.btn {
+  background-color: white;
+  border: 1px solid #cccccc;
+  //border-radius: 1rem;
+  color: #696969;
+  padding: 0.5rem;
+  text-transform: lowercase;
+}
+
+.btn--block {
+  display: block;
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards__item {
+  display: flex;
+  padding: 1rem;
+  @media(min-width: 40rem) {
+    width: 50%;
+  }
+  @media(min-width: 56rem) {
+    width: 33.3333%;
+  }
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  &:hover {
+    .card__image {
+      filter: contrast(100%);
+    }
+  }
+}
+
+.card__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.card__image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  //filter: saturate(180%);
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);;
+  &::before {
+    content: "";
+	  display: block;
+    padding-top: 56.25%; // 16:9 aspect ratio
+  }
+  @media(min-width: 40rem) {
+    &::before {
+      padding-top: 66.6%; // 3:2 aspect ratio
+    }
+  }
+}
+
+.card__image--ppt1 {
+  background-image: url(ppt1.png);
+}
+.card__image--ppt2 {
+  background-image: url(ppt2.png);
+}
+.card__image--ppt3 {
+  background-image: url(ppt3.png);
+}
+.card__image--ppt4 {
+  background-image: url(ppt4.png);
+}
+.card__image--ppt5 {
+  background-image: url(ppt5.png);
+}
+.card__image--ppt6 {
+  background-image: url(ppt6.png);
+}
+.card__image--ppt7 {
+  background-image: url(ppt7.png);
+}
+.card__image--ppt8 {
+  background-image: url(ppt8.png);
+}
+.card__image--ppt9 {
+  background-image: url(ppt9.png);
+}
+
+
+.card__title {
+  color: @gray-dark;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.card__text {
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+/*font*/
+h1 {
+padding: 20px;
+margin-top:100px;
+font-family: 'Koulen', cursive;
+vertical-align: middle;
+color: white;
+position: relative;
+transition: all .3s linear;
+}
+
+h1:hover{
+color: #e1d08a;
+}
+
+a{
+  text-decoration: none;
+}
+
+.video{
+    border: 1px white solid;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    height: 600px;
+}
+
+        /* 轮播图 */
+</style>
+
+  </head>
+
+  <body>
+<!--导航栏-->
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color:rgba(0, 0, 0, 0.375);">
+    <div class="container-fluid">
+     <a class="navbar-brand" href="#" style="color:white; font-size:25px">
+      <img src="logo.png" alt="Logo" width="70" height="70" >
+      kuruCii
+     </a>
+     </div>
+     <div class="collapse navbar-collapse justify-content-end">
+         <ul class="navbar-nav">
+             <li class="nav-item ">
+                 <a class="nav-link" href="kuruCii's world.html" style="color:white;">Home page</a>
+             </li>
+         </ul>
+     </div>
+    </nav>
+
+
+
+    <!--玫红色方块-->
+<div class=container-fluid>
+    <div id="cube-wrap">
+  <div class="cube" id="cube">
+    <div class="face top"></div>
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face left"></div>
+    <div class="face right"></div>
+    <div class="face bottom"></div>
+    <div class="inner-wrap">
+      <div class="face inner inner1"></div>
+      <div class="face inner inner2"></div>
+      <div class="face inner inner3"></div>
+    </div>
+  </div>
+</div>
+
+    <!--标题-->
+<div class=container-fluid>
+<div class="content">
+  <h1 class="title" >Display of My Work
+    <div class="aurora">
+      <div class="aurora__item"></div>
+      <div class="aurora__item"></div>
+      <div class="aurora__item"></div>
+      <div class="aurora__item"></div>
+    </div>
+  </h1>
+  <p class="subtitle" >———— Less is More ————</p>
+</div>
+</div>
+
+<!--ppt部分-->
+<div class="container-fluid text-center">
+  <h1>PPT Works(excerpts)</h1>
+</div>
+<!--card-->
+<ul class="cards">
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt1"></div>
+      <div class="card__content">
+        <div class="card__title">Survey on animation preference of post-00s college students</div>
+        <p class="card__text">This is my final work for social investigation course.The topic of our team is the survey of animation preference of post-00s college students.</p>
+        <a href="ppt1 display.html"><button class="btn btn--block card__btn ">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt2"></div>
+      <div class="card__content">
+        <div class="card__title">Colorkey's e-commerce marketing analysis</div>
+        <p class="card__text">This is my midterm assignment for interactive marketing course.Our team studied the brand's marketing strategy and put forward suggestions for optimization.The exquisite typeset won the teacher's praise.</p>
+        <a href="ppt2 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt3"></div>
+      <div class="card__content">
+        <div class="card__title">Investigation on the difference between Zhihu and Douban</div>
+        <p class="card__text">This is my final work for intelligent media communication course.Our team investigated the differences between the two apps in terms of monetization model, site culture, and user characteristics.</p>
+        <a href="ppt3 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt4"></div>
+      <div class="card__content">
+        <div class="card__title">Case study of content operation in pet industry</div>
+        <p class="card__text">This is my midterm assignment for e-commerce operation course.I led my team studying the content operation activities of a Douyin self-media account and an e-commerce brand and putting forward suggestions.</p>
+        <a href="ppt4 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt5"></div>
+      <div class="card__content">
+        <div class="card__title">The explanation of advertising spokespersons</div>
+        <p class="card__text">This is my final work for introduction to advertising course.The theme is a lesson on advertising literacy for non-advertising scholars.</p>
+        <a href="ppt5 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt6"></div>
+      <div class="card__content">
+        <div class="card__title">The application of face recognition technology in new retail</div>
+        <p class="card__text">This is my final work for introduction to digital marketing course.Our team introduced the application, value and cases of face recognition technology in marketing and put forward some thoughts.</p>
+        <a href="1.pdf">
+          <a href="ppt6 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+        </a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt7"></div>
+      <div class="card__content">
+        <div class="card__title">A literature review on contemporary issues of love and marriage</div>
+        <p class="card__text">This is my midterm work for social science research methods course.The research types include the problems and status quo of marriage and childbearing, contemporary youth's views on marriage and love, etc.</p>
+        <a href="ppt7 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt8"></div>
+      <div class="card__content">
+        <div class="card__title">Interpretation of literary and creative works</div>
+        <p class="card__text">This is my final work for Wang Yangming's philosophy course.This ppt expounds my process of making a literary creation work with the theme of "mind is principal" and my understanding of Yangming's philosophy.</p>
+        <a href="ppt8 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+  <li class="cards__item">
+    <div class="card">
+      <div class="card__image card__image--ppt9"></div>
+      <div class="card__content">
+        <div class="card__title">One-stop pomelo e-commerce small program</div>
+        <p class="card__text">This is my road show work for the e-commerce Tri-creative competition. The work won the third prize in the school competition.</p>
+        <a href="ppt9 display.html"><button class="btn btn--block card__btn">Preview</button></a>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<!--design部分-->
+<div class="container-fluid text-center">
+  <h1>UI Design by PS</h1>
+</div>
+
+
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div class="col">
+      <img src="ui1.jpg">
+    </div>
+    <div class="col">
+      <img src="ui2.jpg">
+    </div>
+    <div class="col">
+      <img src="ui3.jpg">
+    </div>
+    <div class="col">
+      <img src="ui4.jpg">
+    </div>
+  </div>
+</div>
+
+<!--vedio部分-->
+
+<div class="container-fluid text-center">
+  <h1>Vedio Creation by PR</h1>
+</div>
+<div class="container-fluid text-center">
+   <div class="video" style="clear:both;display:block;margin:auto">
+    <iframe  src="https://player.bilibili.com/player.html?aid=434464214&bvid=BV153411D78y&cid=941515143&page=1&high_quality=1"
+        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  style="height: 100%;width: 100%;" > </iframe>
+   </div>
+   <p>(see more works in my bilibili account)</p>
+</div>
+
+<!--摄影作品部分-->
+<div class="container-fluid text-center">
+  <h1>Photography</h1>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+
+     //cube
+    var cube = document.getElementById("cube");
+    var cubeWrap = document.getElementById("cube-wrap");
+    var isDragging = false;
+
+    var currentX, currentY, initialX, initialY;
+    var xOffset = 0,
+      yOffset = 0;
+
+    // For desktop
+    cubeWrap.addEventListener("mousedown", dragStart, false);
+    cubeWrap.addEventListener("mouseup", dragEnd, false);
+    cubeWrap.addEventListener("mousemove", drag, false);
+
+    // For mobile touch
+    cubeWrap.addEventListener("touchstart", dragStart, false);
+    cubeWrap.addEventListener("touchend", dragEnd, false);
+    cubeWrap.addEventListener("touchmove", drag, false);
+
+    function dragStart(e) {
+      e = e.type == "touchstart" ? e.touches[0] : e; // For touch event
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+
+      // Check if the target is cubeWrap or a child of cubeWrap
+      if (cubeWrap.contains(e.target)) {
+        isDragging = true;
+      }
+    }
+
+
+    function dragEnd() {
+      initialX = currentX;
+      initialY = currentY;
+      isDragging = false;
+    }
+
+    function drag(e) {
+      if (isDragging) {
+        e = e.type == "touchmove" ? e.touches[0] : e; // For touch event
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, cube);
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "rotateX(" + (-yPos) + "deg) rotateY(" + (-xPos) + "deg)";
+    }
+
+//carousel
+
+    </script>
+  </body>
+</html>
